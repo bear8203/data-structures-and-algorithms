@@ -1,0 +1,46 @@
+using System;
+
+
+public class MyLinkedList
+{
+  public MyLinkedList() // Constructor
+  {
+    // 10 -> 5 -> 16
+    LinkedList myLinkedList = new LinkedList(10);
+    myLinkedList.Append(5);
+    myLinkedList.Append(16);
+  }
+}
+
+public class LinkedList
+{
+  Node _head;
+  Node _tail;
+  int _length;
+  
+  public LinkedList(int value) // Constructor
+  {
+    _head = new Node(value);
+    _tail = _head;
+    _length = 1;
+  }
+
+  public void Append(int value)
+  {
+    _tail.next = new Node(value);
+    _tail = _tail.next;
+    _length++;
+  }
+}
+
+public class Node
+{
+  public int value { get; set; }
+  public Node next { get; set; }
+
+  public Node(int value) // Constructor
+  {
+    this.value = value;
+    this.next = null;
+  }
+}

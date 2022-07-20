@@ -1,0 +1,38 @@
+using System;
+
+namespace Sort
+{
+  public class SelectionSort
+  {
+    public SelectionSort()
+    {
+      int[] numbers = new int[] { 99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0 };
+      numbers = Sort(numbers);
+      for(int i = 0; i < numbers.Length; i++)
+      {
+        Console.Write(numbers[i] + ", ");
+      }
+    }
+
+    public int[] Sort(int[] array)
+    {
+      for(int i = 0; i < array.Length; i++)
+      {
+        // Start current index as minimum
+        int min = i;
+        int cache = array[i];
+        for(int j = i + 1; j < array.Length; j++)
+        {
+          if(array[j] < array[min])
+          {
+            // Update minimum if current is lower than last
+            min = j;
+          }
+        }
+        array[i] = array[min];
+        array[min] = cache;
+      }
+      return array;
+    }
+  }
+}

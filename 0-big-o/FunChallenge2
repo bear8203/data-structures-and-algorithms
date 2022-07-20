@@ -1,0 +1,40 @@
+using System;
+
+class FunChallenge2
+{
+  static void AnotherFunChallenge()
+  {
+    Console.Write("Please Type How Many Times?");
+    string inputString = Console.ReadLine();
+    int input = Int32.Parse(inputString);
+    
+    int a = 5; // O(1)
+    int b = 10; // O(1)
+    int c = 50; // O(1)
+
+    for(int i = 0; i < input; i++) // O(n)
+    {
+      int x = i + 1; // O(n)
+      int y = i + 2; // O(n)
+      int z = i + 3; // O(n)
+      Console.WriteLine("Answer1 : x = {0}, y = {1}, z = {2}", x, y, z); // Debug
+    }
+
+    for(int j = 0; j < input; j++) // O(n)
+    {
+      int p = j * 2; // O(n)
+      int q = j * 2; // O(n)
+      Console.WriteLine("Answer2 : p = {0}, q = {1}", p, q); // Debug
+    }
+
+    string whoAmI = "I don't know"; // O(1)
+  }
+  
+  public static void Main(string[] arg)
+  {
+    AnotherFunChallenge();
+    // 4 + 4n + 3n
+    // O(4 + 7n)
+    // O(n)
+  }
+}

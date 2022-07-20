@@ -1,0 +1,64 @@
+// The 4 rules for Big O
+// Rule 1 : Worst Case
+//          Break; Loops for Check when I got the Answer
+// Rule 2 : Remove Constants
+// Rule 3 : Different terms for inputs
+// Rule 4 : Drop non Dominants
+using System;
+
+
+class BigO2
+{
+  // For Rule2
+  static void PrintFirstItemThenFirstHalfThenSayHi100Times(string[] items)
+  {
+    Console.WriteLine(items[0]); // O(1)
+
+    int middleIndex = (int)Math.Floor(items.Length / 2f);
+    int index = 0;
+
+    while (index < middleIndex) // O(n/2)
+    {
+      Console.WriteLine(items[index]);
+      index++;
+    }
+
+    for (int j = 0; j < 100; j++) // O(100)
+    {
+      Console.WriteLine("hi");
+    }
+  }
+  // 1 + n/2 + 100
+  // 101 + n/2 (Rule2. Drop the Constants n/2 => n)
+  // O(n)
+
+  
+  // For Rule3
+  static void comrpessBoxesTwice(int[] boxes, int[] boxes2)
+  {
+    foreach(int box in boxes) // O(a)
+    {
+      Console.WriteLine(box);
+    }
+
+    foreach(int box in boxes2) // O(b)
+    {
+      Console.WriteLine(box);
+    }
+  }
+  // O(a + b) (Different terms for inputs)
+
+  
+  
+  public static void Main(string[] arg)
+  {
+    string[] items = new string[] {"stupid",
+                                   "crazy",
+                                   "why",
+                                   "what?",
+                                   "iLoveYou",
+                                   "hate"};
+    PrintFirstItemThenFirstHalfThenSayHi100Times(items);
+    
+  }
+}

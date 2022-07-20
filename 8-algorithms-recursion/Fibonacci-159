@@ -1,0 +1,49 @@
+// Given a number N return the index value of the Fibonacci sequence, where the sepuence is:
+
+using System;
+
+
+namespace Recursion
+{
+  public class Fibonacci
+  {
+    public Fibonacci()
+    {
+      Console.WriteLine(FibonacciIterativeRecursive(5));
+      Console.WriteLine(FibonacciIterative(5));
+    }
+    
+    int FibonacciIterativeRecursive(int number) // O(2^n)
+    { 
+      // 4 => 1 + 1 + 2 + 3
+      if(number < 2)
+      {
+        return number;
+      }
+      // 4 = Fibonacci(3) + Fibonacci(2)
+      // 4 = (Fibonacci(2) + 1) + (1 + 0)
+      // 4 = ((1 + 0) + 1) + (1 + 0)
+      // 4 = 2 + 1
+      // 4 = 3
+      return FibonacciIterrativeRecursive(number - 1) + FibonacciIterrativeRecursive(number - 2);
+    }
+
+    int FibonacciIterative(int number) // O(n)
+    {
+      // 4 => 1 + 1 + 2 + 3
+      int fibonachiNumber = 1;
+      int cache1 = 1;
+      int cache2 = 1;
+      for(int i = 1; i < number - 1; i++)
+      {
+        // 0 - 1 + 1, 2
+        // 1 - 2 + 1, 3
+        // 2 - 3 + 2, 5
+        cache1 = fibonachiNumber; // 1, 2, 3
+        fibonachiNumber = cache1 + cache2; // 1+1, 2+1, 3+2
+        cache2 = cache1; // 1, 2, 3
+      }
+      return fibonachiNumber;
+    }
+  }
+}

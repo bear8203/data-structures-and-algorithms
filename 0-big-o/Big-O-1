@@ -1,0 +1,71 @@
+using System;
+// Stopwatch for check in milliseconds
+using System.Diagnostics;
+
+
+class BigO1
+{ 
+  static void FindNemo(string[] s)
+  {
+    Stopwatch sw = Stopwatch.StartNew();
+    
+    for(int i = 0; i < s.Length; i++)
+    {
+      Console.WriteLine("running...");
+      if(s[i] == "nemo")
+      {
+        Console.WriteLine("\nFound Nemo!");
+        break; // for Efficient
+      }
+    }
+    
+    sw.Stop();
+    
+    Console.WriteLine("\nTime elapsed : {0}ms",
+      sw.Elapsed.TotalMilliseconds);
+  }
+
+  public static string[] Fill(string s, int i)
+  {
+    string[] f = new string[i];
+    
+    for(int j = 0; j < i; j++)
+    {
+      f[j] = s;
+    }
+    
+    return f;
+  }
+  
+  public static void Main(string[] arg)
+  {
+    string[] nemo = new string[] { 
+      "nemo"};
+    string[] everyone = new string[] { 
+      "dory", 
+      "bruce",
+      "marlin",
+      "nemo",
+      "nomo",
+      "what",
+      "the",
+      "great"};
+    string[] large = new string[10000];
+    large = Fill("nemo", 10000);
+      
+    FindNemo(everyone); 
+    // O(n) -> Linear Time
+
+    /*
+    int[] boxes = new int[] {0, 1, 2, 3};
+    logFirstTwoBoxes(boxes); // O(1)
+    */
+  }
+
+  /*
+  static void logFirstTwoBoxes(int[] boxes) {
+    Console.WriteLine(boxes[0]);
+    Console.WriteLine(boxes[1]);
+  }
+  */
+}

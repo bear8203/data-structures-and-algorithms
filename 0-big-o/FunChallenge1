@@ -1,0 +1,38 @@
+using System;
+// Stopwatch for check in milliseconds
+// using System.Diagnostics;
+
+
+class FunChallenge1
+{ 
+  static int FunChallenge()
+  {
+    int a = 10; // O(1)
+    a = 50 + 3; // O(1)
+
+    Console.WriteLine("How many number array you will try?"); // O(1)
+    string input = Console.ReadLine(); // O(1)
+
+    int i = Int32.Parse(input); // O(1)
+    for (int j = 0; j < i; j++) // O(n)
+    {
+      AnotherFuntion(); // O(n)
+      bool stranger = true; // O(n)
+      a++; // O(n)
+    }
+
+    return a; // O(1)
+  }
+
+  static void AnotherFuntion()
+  {
+    //
+  }
+  
+  public static void Main(string[] arg)
+  {
+    Console.WriteLine("Result is : {0}", FunChallenge());
+    // O(6 + 4n)
+    // O(n)
+  }
+}

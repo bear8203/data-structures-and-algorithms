@@ -1,0 +1,46 @@
+// Write 2 functions that finds the factorial of any number. One should use recursive, the other should just use a for loop
+// ex) 6! (! = Factorial)
+//     6! == 6 * 5 * 4 * 3 * 2 * 1
+
+// 5! = 5 * 4 * 3 * 2 * 1
+// 5! = 5 * 4!
+// 5! = 5 * 4 * 3!
+// ...
+using System;
+
+
+namespace Recursion
+{
+  public class Factorial
+  {
+    public Factorial()
+    {
+      Console.WriteLine(FindFactorialRecursive(5));
+      Console.WriteLine(FindFactorialIterative(5));
+    }
+    
+    int FindFactorialRecursive(int number) // O(n)
+    { 
+      if(number == 2)
+      {
+        return 2;
+      }
+      // 4! = 4 * 3 * 2 * 1
+      // 4! = 4 * 3!
+      // 4! = 4 * 3 * 2!
+      // 4! = 4 * 3 * 2 * 1
+      return number * FindFactorialRecursive(number - 1);
+    }
+
+    int FindFactorialIterative(int number) // O(n)
+    {
+      int result = number;
+      for(int i = number; i > 1; i--)
+      {
+        result = result * (i - 1);  
+      }
+      return result;  
+    }
+  }
+
+}

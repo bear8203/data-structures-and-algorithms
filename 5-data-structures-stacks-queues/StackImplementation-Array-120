@@ -1,0 +1,93 @@
+using System;
+
+
+namespace StacksQueues
+{
+  public class StackArrays
+  {
+    public StackArrays() // Constructor
+    {
+      Stack myStack = new Stack();
+      // Discode
+      // Udemy
+      // google
+      myStack.Push("google");
+      myStack.Push("Udemy");
+      myStack.Push("Discode");
+
+      myStack.Print();
+
+      // Udemy
+      // google
+      myStack.Pop();
+      myStack.Print();
+
+      // null
+      myStack.Pop();
+      myStack.Pop();
+      myStack.Print();
+    }
+  }
+
+  public class Stack
+  {
+    public object[] data { get; set; }
+    public int Length { get; set; }
+    
+    public Stack() // Constructor
+    {
+      // this.data = new object[0];
+      this.Length = 0;
+    }
+
+    public object Peek() // Top of the stacks
+    {
+      return this.data[this.Length - 1];
+    }
+
+    public void Push(object value) // Stack on the top
+    {
+      if(this.Length > 0)
+      {
+        object[] cache = new object[this.Length];
+        Array.Copy(this.data, cache, this.Length);
+        this.data = new object[this.Length + 1];
+        Array.Copy(cache, this.data, this.Length);
+      }
+      else
+      {
+        this.data = new object[1];
+      }
+      this.data[this.Length] = value;
+      this.Length++;
+    }
+
+    public void Pop() // Remove a top of stack
+    {
+      if(this.Length == 0)
+      {
+        return;
+      }
+      object[] cache = new object[this.Length - 1];
+      Array.Copy(this.data, cache, this.Length - 1);
+      this.data = new object[this.Length - 1];
+      Array.Copy(cache, this.data, this.Length -  1);
+      
+      this.Length--;
+    }
+
+    public void Print()
+    {
+      if(this.Length == 0)
+      {
+        Console.WriteLine("null");
+      }
+
+      for(int i = 1; i < this.Length + 1; i++)
+      {
+        Console.WriteLine(this.data[this.Length - i]);
+      }
+      Console.WriteLine();
+    }
+  }
+}

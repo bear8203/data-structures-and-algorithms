@@ -1,0 +1,103 @@
+using System;
+
+
+namespace Sort
+{
+  public class MergeSort
+  {
+    public MergeSort()
+    {
+      int[] numbers = new int[] { 99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0, 13 };
+      numbers = Sort(numbers);
+      for(int i = 0; i < numbers.Length; i++)
+      {
+        Console.Write(numbers[i] + ", ");
+      }
+    }
+
+    public int[] Sort(int[] array)
+    {
+      if(array.Length < 2)
+      {
+        return array;
+      }
+
+      // Split the array in into right and left
+      int length = array.Length;
+      
+      int middle = Convert.ToInt32(Math.Round((double)length / 2));
+      int[] left = new int[middle];
+      for(int i = 0; i < middle; i++)
+      {
+        left[i] = array[i];
+      }
+      // Recursive split left array
+      left = Sort(left);
+
+      // Debug Left
+      Console.Write("Sort() Left Array : ");
+      for(int i = 0; i < left.Length; i++) 
+        Console.Write(left[i] + ", ");
+      Console.WriteLine();
+      
+      int[] right = new int[length - middle];
+      for(int i = middle; i < array.Length; i++)
+      {
+        right[i - middle] = array[i];
+      }
+      // Recursive split left array
+      right = Sort(right);
+
+      // Debug Right
+      Console.Write("Sort() Right Array : ");
+      for(int i = 0; i < right.Length; i++) 
+        Console.Write(right[i] + ", ");
+      Console.WriteLine();
+      
+      // Recursive Merge;
+      return Merge(left, right);
+    }
+
+    int[] Merge(int[] left, int[] right)
+    {
+      int length = left.Length + right.Length;
+      int[] result = new int[length];
+
+      int indexLeft = 0;
+      int indexRight = 0;
+      int indexResult = 0;
+
+      while (indexLeft < left.Length || indexRight < right.Length)
+      {
+        if (indexLeft < left.Length && indexRight < right.Length)
+        {
+          if (left[indexLeft] <= right[indexRight])
+          {
+            result[indexResult] = left[indexLeft];
+            indexLeft++;
+            indexResult++;
+          }
+          else
+          {
+            result[indexResult] = right[indexRight];
+            indexRight++;
+            indexResult++;
+          }
+        }
+        else if (indexLeft < left.Length)
+        {
+          result[indexResult] = left[indexLeft];
+          indexLeft++;
+          indexResult++;
+        }
+        else if (indexRight < right.Length)
+        {
+          result[indexResult] = right[indexRight];
+          indexRight++;
+          indexResult++;
+        }
+      }
+      return result;
+    }
+  }
+}

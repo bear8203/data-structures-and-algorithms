@@ -1,0 +1,159 @@
+using System;
+
+
+public class MyLinkedList
+{
+  public MyLinkedList() // Constructor
+  {
+    // 10 -> 5 -> 16
+    DoublyLinkedList myLinkedList = new DoublyLinkedList(10);
+    myLinkedList.Append(5);
+    myLinkedList.Append(16);
+    myLinkedList.Print();
+    // 1 -> 10 -> 5 -> 16
+    myLinkedList.Prepend(1);
+    myLinkedList.Print();
+    // 1 -> 10 -> 99 -> 5 -> 16
+    myLinkedList.Insert(2, 99);
+    myLinkedList.Print();
+    // 1 -> 10 -> 5 -> 16
+    myLinkedList.Remove(2);
+    myLinkedList.Print();
+    // 10 -> 5 -> 16
+    myLinkedList.Remove(0);
+    myLinkedList.Print();
+    // 10 -> 5
+    myLinkedList.Remove(2);
+    myLinkedList.Print();
+  }
+}
+
+public class DoublyLinkedList
+{
+  public Node head { get; set; }
+  public Node tail { get; set; }
+  public int Length { get; set; }
+  
+  public DoublyLinkedList(int value) // Constructor
+  {
+    this.head = new Node(value);
+    this.tail = this.head;
+    this.Length = 1;
+  }
+
+  public void Append(int value) // O(1)
+  {
+    Node newNode = new Node(value);
+    newNode.prev = this.tail;
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.Length++;
+  }
+
+  public void Prepend(int value) // O(1) 
+  {
+    Node newNode = new Node(value);
+    newNode.next = this.head;
+    this.head.prev = newNode;
+    this.head = newNode;
+    this.Length++;
+  }
+
+  public void Insert(int index, int value) // O(n)
+  {
+    if(index == 0)
+    {
+      Prepend(value);
+      return;
+    }
+    else if(index >= this.Length)
+    {
+      Append(value);
+      return;
+    }
+
+    Node current = traverseToIndex(index - 1);
+    Node currentNext = current.next;
+    Node newNode = new Node(value);
+    newNode.next = currentNext;
+    newNode.prev = current;
+    current.next = newNode;
+    currentNext.prev = newNode;
+    this.Length++;
+  }
+
+  public void Remove(int index) // O(n)
+  {
+    Node next;
+    Node current;
+    if(index == 0)
+    {
+      next = this.head.next;
+      this.head = null; // Clear the class
+      this.head = next; // Insert the referenced class
+      this.head.prev = null;
+    }
+    else
+    {
+      current = traverseToIndex(index - 1);
+      if(index >= this.Length - 1) // It is tail
+      {
+        current.next = null; // Clear the class
+        this.tail = current;
+      }
+      else
+      {
+        next = current.next.next;
+        next.prev = current;
+        current.next = null; // Clear the class
+        current.next = next;
+      }
+    }
+    this.Length--;
+  }
+
+  public void Print()
+  {
+    if (this.head == null)
+    {
+      return;
+    }
+    Node current = this.head;
+    while (current != null)
+    {
+      Console.Write(current.value);
+      current = current.next;
+      if(current != null)
+      {
+        Console.Write(" -> ");
+      }
+    }
+    Console.WriteLine();
+  }
+
+  Node traverseToIndex(int index) // lookup - O(n)
+  {
+    Node current = this.head;
+    int i = 0;
+    while(i < index)
+    {
+      current = current.next;
+      i++;
+    }
+    return current;
+  }
+}
+
+public class Node
+{
+  public int value { get; set; }
+  public Node next { get; set; }
+  public Node prev { get; set; }
+
+  public Node(int value) // Constructor
+  {
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}

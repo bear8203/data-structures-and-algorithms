@@ -1,0 +1,119 @@
+using System;
+
+
+namespace StacksQueues
+{
+  public class Queues
+  {
+    public Queues()
+    {
+      Queue myQueue = new Queue();
+      // Joy
+      // Matt
+      // Pavel
+      // Samir
+      myQueue.Enqueue("Joy");
+      myQueue.Enqueue("Matt");
+      myQueue.Enqueue("Pavel");
+      myQueue.Enqueue("Samir");
+
+      myQueue.Print();
+      
+      // Matt
+      // Pavel
+      // Samir
+      myQueue.Dequeue();
+
+      myQueue.Print();
+      
+      myQueue.Dequeue();
+      myQueue.Dequeue();
+      myQueue.Dequeue();
+      
+      myQueue.Print();
+    }
+  }
+  
+  class Queue
+  {
+    public Node first { get; set; }
+    public Node last { get; set; }
+    public int Length { get; set; }
+    
+    public Queue()
+    {
+      this.first = null;
+      this.last = null;
+      this.Length = 0;
+    }
+
+    public Node Peek()
+    {
+      if(this.Length == 0)
+      {
+        return null;
+      }
+      return this.first;
+    }
+
+    public void Enqueue(object value)
+    {
+      Node node = new Node(value);
+      if(this.Length == 0)
+      {
+        this.first = node;
+        this.last = node;
+      }
+      else
+      {
+        this.last.next = node;
+        // For the second queue, last is referenced on first
+        this.last = node;
+      }
+      this.Length++;
+    }
+
+    public void Dequeue()
+    {
+      if(this.first == null)
+      {
+        return;
+      }
+      if(this.first == this.last) // Understand reference
+      {
+        this.last = null;
+      }
+      Node node = this.first; // Keep pointer or GC
+      this.first = this.first.next;
+      this.Length--;
+    }
+
+    public void Print()
+    {
+      if(this.Length == 0)
+      {
+        Console.WriteLine("null");
+        return;
+      }
+      Node node = this.first;
+      while(node != null)
+      {
+        Console.WriteLine(node.value);
+        node = node.next;
+      }
+      Console.WriteLine();
+    }
+  }
+  
+  class Node 
+  {
+    public object value { get; set; }
+    public Node next;
+
+    public Node(object value)
+    {
+      this.value = value;
+      this.next = null;
+    }
+  }
+}

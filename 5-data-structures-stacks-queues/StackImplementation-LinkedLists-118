@@ -1,0 +1,113 @@
+using System;
+
+
+namespace StacksQueues
+{
+  public class StackLinkedLists
+  {
+    public StackLinkedLists() // Constructor
+    {
+      Stack myStack = new Stack();
+      // Discode
+      // Udemy
+      // google
+      myStack.Push("google");
+      myStack.Push("Udemy");
+      myStack.Push("Discode");
+
+      myStack.Print();
+
+      // Udemy
+      // google
+      myStack.Pop();
+      myStack.Print();
+
+      // null
+      myStack.Pop();
+      myStack.Pop();
+      myStack.Print();
+    }
+  }
+
+  public class Stack
+  {
+    public Node top { get; set; }
+    public Node bottom { get; set; }
+    public int Length { get; set; }
+    
+    public Stack() // Constructor
+    {
+      this.top = null;
+      this.bottom = null;
+      this.Length = 0;
+    }
+
+    public Node Peek() // Top of the stacks
+    {
+      return this.top;
+    }
+
+    public void Push(object value) // Stack on the top
+    {
+      Node node = new Node(value);
+
+      if(this.Length == 0)
+      {
+        this.bottom = node;
+      }
+      else
+      {
+        node.next = this.top;
+      }
+      this.top = node;
+      this.Length++;
+    }
+
+    public void Pop() // Remove a top of stack
+    {
+      if(this.top == null)
+      {
+        return;
+      }
+      if(this.top == this.bottom)
+      {
+        this.bottom = null;
+      }
+      
+      // the Class is get lost in memory and cannot clean by GC
+      // this.top = this.top.next;
+      Node node = this.top; // GC will clean
+      this.top = node.next;
+      this.Length--;
+    }
+
+    public void Print()
+    {
+      if(this.top == null || this.bottom == null)
+      {
+        Console.WriteLine("null");
+      }
+
+      Node node = this.top;
+      // for(int i = 0; i < this.Length; i++)
+      while(node != null)
+      {
+        Console.WriteLine(node.value);
+        node = node.next;
+      }
+      Console.WriteLine();
+    }
+  }
+
+  public class Node
+  {
+    public object value { get; set; }
+    public Node next { get; set; }
+    
+    public Node(object value)
+    {
+      this.value = value;
+      this.next = null;
+    }
+  }
+}

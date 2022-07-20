@@ -1,0 +1,86 @@
+using System;
+
+
+namespace Arrays
+{
+  public class ImplementingAnArray
+  {
+    public ImplementingAnArray()
+    {
+      Array myArray = new Array();
+      myArray.Push("hi");
+      myArray.Push("you");
+      myArray.Push("!");
+      myArray.Delete(1);
+      // Console.WriteLine(myArray.Get(0));
+      myArray.Print();
+    }
+  }
+
+  public class Array
+  {
+    public int Length { get; set; }
+    public object[] data { get; set; }
+
+    public Array()
+    {
+      this.Length = 0;
+      this.data = new object[1];
+    }
+
+    public object Get(int index) {
+      int length = this.data.Length;
+      if (length > 0 && length > index)
+      {
+        return this.data[index];
+      }
+      Console.WriteLine ("null");
+      return null;
+    }
+
+    public void Push(object item)
+    {
+      if(this.data.Length == this.Length)
+      {
+        object[] cache = new object[this.Length]; 
+        System.Array.Copy(this.data, cache, this.Length); // Save the data to cache
+        this.data = new object[this.Length + 1]; // Extend array memory allocation
+        System.Array.Copy(cache, this.data, this.Length); // Copy cache data to new scale of array
+      }
+      this.data[this.Length] = item;
+      this.Length++;
+    }
+
+    public void Pop()
+    {
+      object poped = data[this.Length - 1];
+      this.data[this.Length - 1] = null;
+      this.Length--;
+    }
+
+    public void Print()
+    {
+      for(int i = 0; i < this.Length; i++)
+      {
+        Console.Write(this.data[i].ToString() + ", ");
+      }
+      Console.WriteLine();
+    }
+
+    public void Delete(int index)
+    {
+      object itemToDelete = this.data[index];
+      ShiftItems(index);
+    }
+
+    void ShiftItems(int index)
+    {
+      for (int i = index; i < this.Length - 1; i++)
+      {
+        this.data[i] = this.data[i + 1];
+      }
+      data[this.Length - 1] = null;
+      this.Length--;
+    }
+  }
+}

@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+namespace Graphs
+{
+  public class GraphImplementation
+  {
+    public GraphImplementation()
+    {
+      //    3 ----- 4 ----- 5
+      //    |       |       |
+      //    1 ----- 2       6
+      //      \   /
+      //        0
+      Graph myGraph = new Graph();
+      myGraph.AddVertex("0");
+      myGraph.AddVertex("1");
+      myGraph.AddVertex("2");
+      myGraph.AddVertex("3");
+      myGraph.AddVertex("4");
+      myGraph.AddVertex("5");
+      myGraph.AddVertex("6");
+      myGraph.AddEdge("3", "1");
+      myGraph.AddEdge("3", "4");
+      myGraph.AddEdge("4", "2");
+      myGraph.AddEdge("4", "5");
+      myGraph.AddEdge("1", "2");
+      myGraph.AddEdge("1", "0");
+      myGraph.AddEdge("0", "2");
+      myGraph.AddEdge("6", "5");
+      
+      myGraph.ShowConnections();
+      // 0 --> 1  2
+      // 1 --> 0  2  3
+      // 2 --> 0  1  4
+      // 3 --> 1  4
+      // 4 --> 2  3  5
+      // 5 --> 4  6
+      // 6 --> 5
+    }
+  }
+
+  public class Graph
+  {
+    public int numberOfNodes { get; set; }
+    public Dictionary<object, List<object>> adjacentList { get; set; }
+
+    public Graph()
+    {
+      this.numberOfNodes = 0;
+      this.adjacentList = new Dictionary<object, List<object>>();
+      // 0 : [1, 2]
+      // 1 : [0, 2, 3]
+      // 2 : [0, 1, 4]
+      // 3 : [2, 4]
+      // 4 : [2, 3, 5]
+      // 5 : [4, 6]
+      // 6 : [5]
+    }
+
+    public void AddVertex(object value)
+    {
+      this.adjacentList.Add(value, new List<object>());
+      this.numberOfNodes++;
+    }
+
+    // Undirected grapth
+    public void AddEdge(object value1, object value2)
+    {
+      this.adjacentList[value1].Add(value2);
+      this.adjacentList[value2].Add(value1);
+    }
+
+    public void ShowConnections()
+    {
+      foreach(var item in adjacentList)
+      {
+        if(adjacentList[item.Key].Count > 0)
+        {
+          List<object> connectedNodes = adjacentList[item.Key];
+          StringBuilder connections = new StringBuilder();
+          foreach(object edge in connectedNodes)
+          {
+            connections.Append(edge).Append("  ");
+          }
+          Console.WriteLine(Convert.ToString(item.Key) + " --> " + connections);
+        }
+        else
+        {
+          Console.WriteLine(Convert.ToString(item.Key) + " --> ");
+        }
+      }
+    }
+  }
+}

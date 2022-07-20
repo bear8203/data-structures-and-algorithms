@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+
+public class ExerciseInterviewQuestion
+{
+  // Give 2 arrays, create a function that let's a user know (true/flase) whether these two arrays contain any common items
+  // For Example :
+  // string[] array1 = new string() {"a", "b", "c", "x"};
+  // string[] array2 = new string() {"z", "y", "i"};
+  // should return false.
+  //
+  // string[] array1 = new string() {"a", "b", "c", "x"};
+  // string[] array2 = new string() {"z", "y", "x"};
+  // should return true.
+
+  // Think first :
+  // 2 parameters - arrays - no size limit 
+  // return true or false
+  //
+  // Try Naive or Brute Force way
+  /*
+  static bool ContainsCommonItem(string[] array1, string[] array2) // O(n^2), O(1) - Space Complexity
+  {
+    for(int i = 0; i < array1.Length; i++)
+    {
+      for(int j = 0; j < array2.Length; j++)
+      {
+        if(array1[i] == array2[j])
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  */
+
+  // Improving! = To be better!
+  // array1 ===> obj {
+  // a: true,
+  // b: true,
+  // c: true,
+  // x: true }
+  //
+  // array2[index] === obj.properties
+  //  
+  static bool ContainsCommonItem(string[] array1, string[] array2) // O(n), O(a) - Space Complexity
+  {
+    // loop through first array and create object where properties === items in the array
+    // In Addition Modularizing? Ask or Tell the idea to Interviewer
+    List<string> map = new List<string>();
+    for (int i = 0; i < array1.Length; i++)
+    {
+      map.Add(array1[i]);
+    }
+    
+    // loop through second array and check if item in second array exists on created object.
+    for (int j = 0; j < array2.Length; j++)
+    {
+      if(map.Contains(array2[j]))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  // Ask is this right? ot improve more? how? kind of things
+
+  // 바로 이렇게 정리된걸 쓴다면, 혼자 일하는 것이고 회사에서 좋아하지 않을것이다.
+  // 위에 쓴것처럼 베이직 부터 고민을 함께하고 결론에 이르는 것을 회사에서는 좋아할 것이다.
+  // Use Language Specific Easier Way & for Readability
+  // for Javascript :
+  // function ContainsCommonItme3(array1, array2) {
+  //   return array1.some(item => array2.includes(item))
+  // }
+  // 
+  // for C#? LinQ?
+  
+  static void Main(string[] args)
+  {
+    string[] array1 = new string[] {"a", "b", "c", "x"};
+    string[] array2 = new string[] {"z", "y", "x"};
+
+    Console.WriteLine(ContainsCommonItem(array1, array2));
+  }
+}

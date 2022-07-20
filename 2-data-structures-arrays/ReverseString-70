@@ -1,0 +1,51 @@
+// Create a function that reverses a string:
+// 'Hi My name is Andrei' should be:
+// 'ierdnA si eman yM iH'
+
+using System;
+
+public class ReverseString
+{
+  public static string Reverse(string str)
+  {
+    // check input
+    if (str == null || str.Length < 2)
+    {
+      return "nothing to Reverse!";
+    }
+
+    // Draft
+    /* 
+    char[] strings = str.ToCharArray();
+    int half = (int)Math.Ceiling((double)strings.Length / 2);
+
+    for(int i = 0; i < half; i++)
+    {
+      char m = strings[i];
+      strings[i] = strings[(strings.Length - 1) - i];
+      strings[(strings.Length - 1) - i] = m;
+    }
+    
+    return new string(strings);
+    */
+
+    // New
+    string reversed = string.Empty;
+
+    for (int i = str.Length - 1; i >= 0; i--)
+    {
+      reversed += str[i];
+    }
+
+    return reversed;
+  }
+  
+  static void Main(string[] args)
+  {
+    string input = "Hi My name is Andrei";
+    Console.WriteLine(input + " to Reverse :");
+    input = Reverse(input);
+
+    Console.WriteLine(input);
+  }
+}

@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+
+
+public class ImplementAHashTable
+{
+  public ImplementAHashTable() // as Main (Constructor)
+  {
+    HashTable myHashTable = new HashTable(50);
+    myHashTable.Set("grapes", 10000);
+    // Console.WriteLine(myHashTable.Get("grapes"));
+    myHashTable.Set("apples", 54);
+    myHashTable.Set("oranges", 2);
+    
+    foreach(string s in myHashTable.Keys())
+    {
+      Console.WriteLine(s);
+    }
+  }
+}
+
+public class HashTable
+{
+  class MyNodes : List<MyNode> {}
+  int _length;
+  MyNodes[] _data;
+  
+  public HashTable(int length)
+  {
+    _length = length;
+    _data = new MyNodes[length];
+  }
+
+  int hash(string key)
+  {
+    int hash = 0;
+
+    for (int i = 0; i < key.Length; i++)
+    {
+      hash = (hash + (int)key[i] * i) % _length;
+      // Make Hash from letter by letters
+      // Console.WriteLine(hash);
+      // "grapes" => 0, 14, 8, 44, 48, 23 => '23'
+    }
+    return hash;
+  }
+
+  public void Set(string key, int value)
+  {
+    int index = hash(key); // address = index
+    if(_data[index] == null)
+    {
+      _data[index] = new MyNodes();
+    }
+    _data[index].Add(new MyNode(key, value));
+  } // O(1)
+
+  public int Get(string key)
+  {
+    int index = hash(key);
+    if (_data[index] == null)
+    {
+      return 0;
+    }
+    foreach (MyNode node in _data[index])
+    {
+      if(node.key.Equals(key))
+      {
+        return node.value;
+      }
+    } // O(1) or O(n) but mostly => O(1)
+    return 0;
+  }
+
+  public List<string> Keys()
+  {
+    List<string> result = new List<string>();
+    for(int i = 0; i < _data.Length; i++)
+    {
+      if(_data[i] != null)
+      {
+        for (int j = 0; j < _data[i].Count; j++)
+        {
+          result.Add(_data[i][j].key); // [table#][nodes/array to [#]].key
+        }
+      }
+    } 
+    return result;
+  }
+}
+
+// a Node : ex.["grapes", 100,000]
+public class MyNode
+{
+  public string key { get; set; }
+  public int value { get; set; }
+
+  public MyNode(string key, int value)
+  {
+    this.key = key;
+    this.value = value;
+  }
+}

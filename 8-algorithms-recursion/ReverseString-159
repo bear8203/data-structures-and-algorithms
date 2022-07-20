@@ -1,0 +1,53 @@
+// Try to implement the answer recursively and also iteratively if you want!
+
+using System;
+
+
+namespace Recursion
+{
+  public class ReverseString
+  {
+    public ReverseString()
+    {
+      // Yoyo Master
+      // retsaM oyoY
+      Console.WriteLine(ReverseStringIterative("Yoyo Master!"));
+      Console.WriteLine(ReverseStringRecursive("Yoyo Master!"));
+    }
+
+    string ReverseStringIterative(string input)
+    {
+      char[] inputCharArray = input.ToCharArray();
+      int halfLength = Convert.ToInt32(Math.Round((Double)inputCharArray.Length / 2));
+      for(int i = 0; i < halfLength; i++)
+      {
+        char cache = inputCharArray[i];
+        inputCharArray[i] = inputCharArray[(inputCharArray.Length - 1) - i];
+        inputCharArray[(inputCharArray.Length - 1) - i] = cache;
+      }
+      return new string(inputCharArray);
+    }
+
+    // ("Yoyo Master!")
+    // ("oyo Master!") + "Y"
+    // ("yo Master!") + "o" + "Y"
+    // ("o Master!") + "y" + "o" + "Y"
+    // (" Master!") + "o" + "y" + "o" + "Y"
+    // ("Master!") + " " + "o" + "y" + "o" + "Y"
+    // ("aster!") + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("ster!") + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("ter!") + "s" + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("er!") + "t" + "s" + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("r!") + "e" + "t" + "s" + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("!") + "r" + "e" + "t" + "s" + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    // ("") + "!" + "r" + "e" + "t" + "s" + "a" + "M" + " " + "o" + "y" + "o" + "Y"
+    string ReverseStringRecursive(string input) // O(n)
+    {
+      if(input == "")
+      {
+        return "";
+      }
+      return ReverseStringRecursive(input.Substring(1)) + input[0];
+    }
+  }
+}

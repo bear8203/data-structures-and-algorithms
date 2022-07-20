@@ -1,0 +1,62 @@
+// Sharing address call "Hash Collisions"
+// To avoiding the collision, hash table need.
+using System;
+using System.Collections.Generic;
+
+
+// a Node : ex.["grapes", 100,000]
+class MyNode
+{
+  public string key { get; set; }
+  public int value { get; set; }
+
+  public MyNode(string key, int value)
+  {
+    this.key = key;
+    this.value = value;
+  }
+}
+
+class HashTable
+{
+  class MyNodes : List<MyNode> {}
+  int _length;
+  MyNodes[] _data;
+  
+  public HashTable(int length)
+  {
+    _length = length;
+    _data = new MyNodes[length];
+  }
+
+  int hash(string key)
+  {
+    int hash = 0;
+
+    // Grap the key letter number (6, "Grapes")
+    for (int i = 0; i < key.Length; i++)
+    {
+      hash = (hash + (int)key[i] * i) % _length;
+      // Make Hash from letter by letters
+      // Console.WriteLine(hash);
+      // "grapes" => 0, 14, 8, 44, 48, 23 => '23'
+    }
+    
+    return hash;
+  }
+}
+
+// A Node Example
+/*
+class User
+{
+  int _age;
+  string _name;
+  bool magic;
+
+  public void Scream()
+  {
+    Console.WriteLine("ahhhhhhhh!");
+  }
+}
+*/

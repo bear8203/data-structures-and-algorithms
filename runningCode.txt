@@ -1,0 +1,22 @@
+백준의 채점 환경은 임의로 프로젝트를 생성하고 사용자가 제출한 소스 코드를 생성한 프로젝트 위에서 실행하는 형태로 동작합니다. 그래서 비슷하게나마 run 1000.cs 만으로 C# 코드 파일을 실행할 수 있도록 해보았습니다.
+
+Windows 환경(run.bat)
+@echo off
+rmdir /s /q Main
+dotnet new console --force -o Main
+copy /Y %1 "Main/Program.cs"
+cd Main
+@echo on
+dotnet run
+@echo off
+cd ../
+
+Shell 환경(run.sh)
+rm -rf Main
+dotnet new console --force -o Main
+cp $1 Main/Program.cs
+cd Main
+dotnet run
+cd ../
+
+이제 run.bat 1000.cs나 sh run.sh 1000.cs 명령만으로 프로젝트를 즉시 실행할 수 있게 되었습니다. 제가 완전히 원하는 형태의 명령어는 아니지만, 단일 명령으로 코드를 실행할 수 있으므로 여기서 만족하고 사용하기로 했습니다.

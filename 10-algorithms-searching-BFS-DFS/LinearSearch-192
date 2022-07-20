@@ -1,0 +1,37 @@
+using System;
+
+
+namespace Search
+{
+  public class LinearSearch
+  {
+    public LinearSearch()
+    {
+      string[] beasts = new string[] {"Centaur", "Godzilla", "Mosura", "Minotaur", "Hydra", "Nessie"};
+
+      Console.WriteLine("IndexOf : " + Array.IndexOf(beasts, "Godzilla"));
+
+      // index of the end with "illa"
+      Console.WriteLine("FindIndex : " + Array.FindIndex(beasts, EndsWithIlla));
+
+      // item with the end with "illa"
+      Console.WriteLine("Find : " + Array.Find(beasts, EndsWithIlla));
+
+      // bool about the containing "Godzilla"
+      Console.WriteLine("Contains : " + Array.Exists(beasts, element => element == "Godzilla"));
+      // https://docs.microsoft.com/en-us/dotnet/api/system.array.exists?view=net-6.0
+    }
+    
+    bool EndsWithIlla(string s)
+    {
+      if((s.Length > 4) && (s.Substring(s.Length - 4).ToLower() == "illa"))
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+  }
+}

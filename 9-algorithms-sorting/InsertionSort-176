@@ -1,0 +1,60 @@
+using System;
+
+namespace Sort
+{
+  public class InsertionSort
+  {
+    public InsertionSort()
+    {
+      int[] numbers = new int[] { 99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0 };
+      numbers = Sort(numbers);
+      for(int i = 0; i < numbers.Length; i++)
+      {
+        Console.Write(numbers[i] + ", ");
+      }
+    }
+    
+    public int[] Sort2(int[] array)
+    {
+        int length = array.Length;
+        for (int i = 1; i < length; ++i)
+        {
+            int key = array[i];
+            int j = i - 1;
+
+            // Move elements of array[0..i-1], 
+            // that are greater than key, 
+            // to one position ahead of 
+            // their current position 
+            while (j >= 0 && array[j] > key)
+            {
+                array[j + 1] = array[j];
+                j = j - 1;
+            }
+            array[j + 1] = key;
+        }
+        return array;
+    }
+    
+    public int[] Sort(int[] array)
+    {
+      for(int i = 0; i < array.Length - 1; i++)
+      {
+        for(int j = i + 1; j > 0; j--)
+        {
+          if(array[j - 1] > array[j])
+          {
+            int cache = array[j - 1];
+            array[j - 1] = array[j];
+            array[j] = cache;
+          }
+          else
+          {
+            break;
+          }
+        }
+      }
+      return array;
+    }
+  }
+}
